@@ -22,15 +22,11 @@ def tableroInical():
 
     #Añadimos el tablero
     with open(tableroFile, "a") as txtFile:
-        #Linea
-        for i in range(0,8):
-            #Columna
-            for n in range(0,7):
-                if i == 0 and n == 0 or i == 7 and n == 0 or i == 0 and n == 6 or i == 7 and n == 6:
-                    txtFile.write('♜')
+        for i in range(1,9):  #Linea
+            for n in range(1,9):  #Columna
                 txtFile.write("\t")
-            if i != 7:
-                txtFile.write("\n")
+                if n == 8:
+                    txtFile.write("\n")
 
         
 tableroInical()
