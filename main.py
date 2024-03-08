@@ -1,15 +1,4 @@
-'''
-URL: https://aprendeconalf.es/docencia/python/retos/ajedrez/
-
-La primera tarea consiste en escribir un programa que guarde en un fichero la secuencia de tableros de una partida de ajedrez. Partiremos del tablero inicial donde las filas del 
-tablero están separadas por cambios de línea y las columnas por tabuladores.
-
-El programa debe guardar el tablero inicial en un fichero con el nombre que elija el usuario. Después debe preguntar al usuario si quiere hacer un movimiento o terminar la partida. 
-Cada vez que el usuario quiera hacer un nuevo movimiento debe preguntar la fila y la columna de la pieza que quiere mover y la fila y la columna a la que la quiere mover. Tras ello 
-añadirá el tablero resultante al final del fichero anterior.
-
-El fichero partida-ajedrez.txt contiene un ejemplo con el fichero resultante de una partida con 3 movimientos.
-'''
+'''URL: https://aprendeconalf.es/docencia/python/retos/ajedrez/ '''
 
 #Fichas
 peonBlanco = "♙"
@@ -25,10 +14,8 @@ alfilNegro = "♝"
 reyNegro = "♛"
 reinaNegro = "♚"
 
-#Nombre del tablero
-tableroName = input("Nombre del tablero: ")
-tableroFile = tableroName + ".txt"
-
+#Funciones
+#Crear tablero
 def tableroInical():
     #Borramos el contenido
     with open(tableroFile, "w") as txtFile:
@@ -37,50 +24,127 @@ def tableroInical():
 
     #Añadimos el tablero
     with open(tableroFile, "a", encoding="utf-8") as txtFile:
-        for i in range(1,9):  #Linea
-            for n in range(1,9):  #Columna
+        for i in range(1,11):  #Linea
+            for n in range(1,11):  #Columna
+                                #Letras
+                if i  == 1:
+                    if n == 2:
+                        txtFile.write("a")
+                    elif n == 3:
+                        txtFile.write("b")
+                    elif n == 4:
+                        txtFile.write("c")
+                    elif n == 5:
+                        txtFile.write("d")
+                    elif n == 6:
+                        txtFile.write("e")
+                    elif n == 7:
+                        txtFile.write("f")
+                    elif n == 8:
+                        txtFile.write("g")
+                    elif n == 9:
+                        txtFile.write("h")
+                    else:
+                        pass
+                #Números
+                if n == 1:
+                    if i == 2:
+                        txtFile.write("1")
+                    elif i == 3:
+                        txtFile.write("2")
+                    elif i == 4:
+                        txtFile.write("3")
+                    elif i == 5:
+                        txtFile.write("4")
+                    elif i == 6:
+                        txtFile.write("5")
+                    elif i == 7:
+                        txtFile.write("6")
+                    elif i == 8:
+                        txtFile.write("7")
+                    elif i == 9:
+                        txtFile.write("8")
+                    else:
+                        pass
+
                 #Fichas
-                if i == 2:
+                if i == 3 and n != 1 and n != 10:
                     txtFile.write(peonBlanco)
                     txtFile.write("\t")
-                elif i == 1 and n == 1 or i == 1 and n == 8:
+                elif i == 2 and n == 2 or i == 2 and n == 9:
                     txtFile.write(torreBlanco)
                     txtFile.write("\t")
-                elif i == 1 and n == 2 or i == 1 and n == 7:
+                elif i == 2 and n == 3 or i == 2 and n == 8:
                     txtFile.write(caballoBlanco)
                     txtFile.write("\t")
-                elif i == 1 and n == 3 or i == 1 and n == 6:
+                elif i == 2 and n == 4 or i == 2 and n == 7:
                     txtFile.write(alfilBlanco)
                     txtFile.write("\t")
-                elif i == 1 and n == 4:
+                elif i == 2 and n == 5:
                     txtFile.write(reyBlanco)
                     txtFile.write("\t")
-                elif i == 1 and n == 5:
+                elif i == 2 and n == 6:
                     txtFile.write(reinaBlanco)
                     txtFile.write("\t")
-                elif i == 7:
+                elif i == 8 and n != 1 and n != 10:
                     txtFile.write(peonNegro)
                     txtFile.write("\t")
-                elif i == 8 and n == 1 or i == 8 and n == 8:
+                elif i == 9 and n == 2 or i == 9 and n == 9:
                     txtFile.write(torreNegro)
                     txtFile.write("\t")
-                elif i == 8 and n == 2 or i == 8 and n == 7:
+                elif i == 9 and n == 3 or i == 9 and n == 8:
                     txtFile.write(caballoNegro)
                     txtFile.write("\t")
-                elif i == 8 and n == 3 or i == 8 and n == 6:
+                elif i == 9 and n == 4 or i == 9 and n == 7:
                     txtFile.write(alfilNegro)
                     txtFile.write("\t")
-                elif i == 8 and n == 4:
+                elif i == 9 and n == 5:
                     txtFile.write(reyNegro)
                     txtFile.write("\t")
-                elif i == 8 and n == 5:
+                elif i == 9 and n == 6:
                     txtFile.write(reinaNegro)
                     txtFile.write("\t")
                 else:
                     txtFile.write("\t")
-                #Saltar columnas
-                if n == 8:
-                    txtFile.write("\n")
 
-        
+                #Saltar columnas
+                if n == 10:
+                    txtFile.write("\n")
+        txtFile.close()
+        #imprimir tablero
+        with open(tableroFile, "r", encoding="utf-8") as table:
+            tablePrint = table.read()
+            print("\n" + tablePrint)
+            table.close()
+
+#Panel de ayuda
+def panelHelp():
+    print("Fichas:\n -Torre\n -Caballo\n -Alfil\n -Rey\n -Reina\n -Peon")
+
+#Nombre del tablero
+tableroName = input("Nombre del tablero: ")
+tableroFile = "tableroPy-" + tableroName + ".txt"
 tableroInical()
+
+#Partida
+x = -1
+while True:
+    x+=1
+    #Turno blanco y negro
+    if x%2 == 0:
+        print("Turno blanco")
+    else:
+        print("Turno negro")
+
+    #Pregunta movimiento
+    inputKey = input("¿Que ficha quieres mover? --> ")
+    inputKey = inputKey.lower()
+
+    #Panel de ayuda
+    if inputKey == "help":
+        panelHelp()
+    
+    #Movimiento
+    if inputKey == "peon" and x%2 == 0:
+        print("Cuantas cas")
+    
