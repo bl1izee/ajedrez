@@ -10,6 +10,21 @@ añadirá el tablero resultante al final del fichero anterior.
 
 El fichero partida-ajedrez.txt contiene un ejemplo con el fichero resultante de una partida con 3 movimientos.
 '''
+
+#Fichas
+peonBlanco = "♙"
+torreBlanco = "♖"
+caballoBlanco = "♘"
+alfilBlanco = "♗"
+reyBlanco = "♕"
+reinaBlanco = "♔"
+peonNegro = "♟"
+torreNegro = "♜"
+caballoNegro = "♞"
+alfilNegro = "♝"
+reyNegro = "♛"
+reinaNegro = "♚"
+
 #Nombre del tablero
 tableroName = input("Nombre del tablero: ")
 tableroFile = tableroName + ".txt"
@@ -21,10 +36,49 @@ def tableroInical():
         txtFile.close()
 
     #Añadimos el tablero
-    with open(tableroFile, "a") as txtFile:
+    with open(tableroFile, "a", encoding="utf-8") as txtFile:
         for i in range(1,9):  #Linea
             for n in range(1,9):  #Columna
-                txtFile.write("\t")
+                #Fichas
+                if i == 2:
+                    txtFile.write(peonBlanco)
+                    txtFile.write("\t")
+                elif i == 1 and n == 1 or i == 1 and n == 8:
+                    txtFile.write(torreBlanco)
+                    txtFile.write("\t")
+                elif i == 1 and n == 2 or i == 1 and n == 7:
+                    txtFile.write(caballoBlanco)
+                    txtFile.write("\t")
+                elif i == 1 and n == 3 or i == 1 and n == 6:
+                    txtFile.write(alfilBlanco)
+                    txtFile.write("\t")
+                elif i == 1 and n == 4:
+                    txtFile.write(reyBlanco)
+                    txtFile.write("\t")
+                elif i == 1 and n == 5:
+                    txtFile.write(reinaBlanco)
+                    txtFile.write("\t")
+                elif i == 7:
+                    txtFile.write(peonNegro)
+                    txtFile.write("\t")
+                elif i == 8 and n == 1 or i == 8 and n == 8:
+                    txtFile.write(torreNegro)
+                    txtFile.write("\t")
+                elif i == 8 and n == 2 or i == 8 and n == 7:
+                    txtFile.write(caballoNegro)
+                    txtFile.write("\t")
+                elif i == 8 and n == 3 or i == 8 and n == 6:
+                    txtFile.write(alfilNegro)
+                    txtFile.write("\t")
+                elif i == 8 and n == 4:
+                    txtFile.write(reyNegro)
+                    txtFile.write("\t")
+                elif i == 8 and n == 5:
+                    txtFile.write(reinaNegro)
+                    txtFile.write("\t")
+                else:
+                    txtFile.write("\t")
+                #Saltar columnas
                 if n == 8:
                     txtFile.write("\n")
 
